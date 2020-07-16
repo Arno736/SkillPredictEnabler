@@ -1,6 +1,6 @@
 module.exports = function SkillPredictEnabler(mod) {
 	let command = mod.command;
-    let mod_name = "skill-prediction"; //Voir si autre nom ?
+    let mod_name = "skill-prediction"; // Other names ?
     
     mod.hook('S_LOGIN', 14, (event) => {
         // 0 = Warrior, 1 = Lancer, 2 = Slayer, 3 = Berserker, 4 = Sorcerer, 5 = Archer,
@@ -16,16 +16,9 @@ module.exports = function SkillPredictEnabler(mod) {
                 LoadSP();
                 break;
         }
-
-
-
-
-
-
 	});
-	function GetClassId (str) { return str.toString().substr(3, 5); }
-
-
+    function GetClassId (str) { return str.toString().substr(3, 5); }
+    
     function LoadSP () {
         try {
             const result = mod.manager.load(mod_name);
@@ -43,6 +36,7 @@ module.exports = function SkillPredictEnabler(mod) {
                 command.message(`Unable to load network instance for mod "${mod_name}"!`);
             }
         } catch (error) {
+            command.message("Error see log for more information !");
             console.log(error);
         }
     }
@@ -57,84 +51,26 @@ module.exports = function SkillPredictEnabler(mod) {
             console.log(error);
         }
     }
-        
 
-
-
-
-
-
-
-    mod.command.add(['spd'], (y) =>{
+    mod.command.add(['spe'], (y) => {
         switch (y) {
-            case "true":
-                FullLoad();
-                LoadMod();
+            case "load":
+                LoadSP();
                 break;
-            case "false":
-                //UnloadMod();
-                FullUnload();
+            case "unload":
+                UnloadSP();
                 break;
-            case "test":
-                TryUnload();
+            case "debug":
+                Debug();
                 break;
             default:
+                command.message('Use spe [load/unload] to load or unload skill-prediction');
                 break;
         }
     });
 
-    function UnloadMod () {
+    function Debug () {
         let modRef = mod.manager.get(mod_name);
-        if (modRef) { 
-            modRef.unloadNetworkInstance(mod.dispatch);
-            command.message(null, `Unloaded network instance for mod "${mod_name}" in current connection!`);
-        }
-        else {
-            command.message(null, `Unable to unload network instance for mod "${mod_name}"!`);
-        }
-        return;
+        confirm.log(modRef);
     }
-    function LoadMod () {
-        let modRef = mod.manager.get(mod_name);
-        if (modRef) { 
-            modRef.loadNetworkInstance(mod.dispatch);
-            command.message(null, `Loaded network instance for mod "${mod_name}" in current connection!`);
-        }
-        else {
-            command.message(null, `Unable to load network instance for mod "${mod_name}"!`);
-        }
-        return;
-    }
-
-
-
-
-
-
-    function TryUnload () {
-        let modRef = mod.manager.get(mod_name);
-        if (modRef) modRef.unloadNetworkInstance(mod.dispatch);
-    }
-
-
-
-
-
-
-
-    function FullLoad () {
-        const result = mod.manager.load(mod_name);
-        if (result)
-            command.message(null, `Loaded "${mod_name}"!`);
-        else
-            command.message(null, `Unable to load "${mod_name}", check log for details!`);
-    }
-    function FullUnload () {
-        const result = mod.manager.unload(mod_name);
-        if (result)
-            command.message(null, `Unloaded "${mod_name}"!`);
-        else
-            command.message(null, `Unable to unload "${mod_name}", check log for details!`);
-    }
-    
 }
