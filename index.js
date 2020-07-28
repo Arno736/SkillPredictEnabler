@@ -1,20 +1,18 @@
 module.exports = function SkillPredictEnabler(mod) {
 	let command = mod.command;
     let mod_name = "skill-prediction"; // Other names ?
-    
+    let curClassId = 0;
     mod.hook('S_LOGIN', 14, (event) => {
         // 0 = Warrior, 1 = Lancer, 2 = Slayer, 3 = Berserker, 4 = Sorcerer, 5 = Archer,
         // 6 = Priest, 7 = Mystic, 8 = Reaper, 9 = Gunner, 10 = Brawler, 11 = Ninja,
         // 12 = Valkyrie
-		let classId = parseInt(GetClassId(event.templateId)) - 1;
-		
-        switch (classId) {
-            case 7: //Mystic
-                if (mod.settings.disableMystic) UnloadSP();
-                break;
-            default:
-                LoadSP();
-                break;
+        let classId = parseInt(GetClassId(event.templateId)) - 1;
+        curClassId = classId;
+        if (mod.settings.disableFor[classId.toString()] == true){
+            UnloadSP();
+        }
+        else{
+            LoadSP();
         }
 	});
     function GetClassId (str) { return str.toString().substr(3, 5); }
@@ -59,6 +57,10 @@ module.exports = function SkillPredictEnabler(mod) {
                 break;
             case "unload":
                 UnloadSP();
+                break;
+            case "setting":
+                mod.settings.disableFor[curClassId.toString()] == !mod.settings.disableFor[curClassId.toString()];
+                command.message('Changed setting for the current class to "Disabled" : ' + mod.settings.disableFor[curClassId.toString()].toString());
                 break;
             case "debug":
                 Debug();

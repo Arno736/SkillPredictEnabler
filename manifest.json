@@ -1,8 +1,8 @@
 {
   "files": {
-    "index.js": "ece3c07d786a2013de834e72dd3b16bd8f063f3266347685056241c4a80779d8",
-    "module.json": "5205a48ca1a6afe3fba13c6c8a98739031670e70248dbaba03afe76db27c22ba",
-    "README.md": "a7821b08eb9c26bb77af9f3e71f3e539c20080e9f230fc31d330419e5e355d4d",
-    "settings_migrator.js": "bb5aa04aaae64906b53eef578af831de1d25e81ec4c3aef9cacbaf4ebdc22ab8"
+    "index.js": "e6a8928297cdfe6e9ac1fc21518b20cc6148a3b903c91266b696861e7bd815aa",
+    "module.json": "5c0f897fdd4f90799845850b33847cc3f43df63fc40e47d823b582325343bb1d",
+    "README.md": "d514d2b2aad08b465792473ad7f622bdd1423f5c4f6d511b5681464558d4e0fe",
+    "settings_migrator.js": "c472424fe8ba75286cb7b2b41d551eda2effe6ac032bb55e1801fdf3f34a8126"
   }
 }

@@ -2,15 +2,15 @@
 	"servers": ["https://raw.githubusercontent.com/Arno736/SkillPredictEnabler/master/"],
 	"supportUrl": ["https://github.com/Arno736/SkillPredictEnabler/issues"],
 	"disableAutoUpdate": false,
-	"name": "Skill Predict Enabler",
+	"name": "Skill-Predict-Enabler",
 	"author": "Arno736",
-	"description": "Automatically disable Skill Prediction for Mystics",
-	"version": "1.0",
+	"description": "Automatically disable Skill Prediction for selected class",
+	"version": "1.2",
 	"options": {
 		"niceName": "Skill Predict Enabler",
 		"guiName": "Skill Predict Enabler",
 		"settingsFile": "settings.json",
 		"settingsMigrator": "settings_migrator.js",
-		"settingsVersion": 1
+		"settingsVersion": 2
 	}
 }

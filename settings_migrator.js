@@ -1,5 +1,22 @@
 const DefaultSettings = {
-    "disableMystic": true
+    "disableFor": {
+        "0" : false,
+        "1" : false,
+        "2" : false,
+        "3" : false,
+        "4" : false,
+        "5" : false,
+        "6" : false,
+        "7" : true,
+        "8" : false,
+        "9" : false,
+        "10" : false,
+        "11" : false,
+        "12" : false
+    }
+    // 0 = Warrior, 1 = Lancer, 2 = Slayer, 3 = Berserker, 4 = Sorcerer, 5 = Archer,
+    // 6 = Priest, 7 = Mystic, 8 = Reaper, 9 = Gunner, 10 = Brawler, 11 = Ninja,
+    // 12 = Valkyrie
 };
 
 module.exports = function MigrateSettings(from_ver, to_ver, settings) {
