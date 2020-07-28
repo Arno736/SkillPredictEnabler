@@ -8,15 +8,23 @@ module.exports = function SkillPredictEnabler(mod) {
         // 12 = Valkyrie
         let classId = parseInt(GetClassId(event.templateId)) - 1;
         curClassId = classId;
-        if (mod.settings.disableFor[classId.toString()] == true){
+        if (mod.settings.disableFor[classId.toString()] == true) {
             UnloadSP();
         }
-        else{
+        else {
             LoadSP();
         }
 	});
     function GetClassId (str) { return str.toString().substr(3, 5); }
-    
+    function SwitchSetting () {
+        if (mod.settings.disableFor[curClassId.toString()] == true) {
+            mod.settings.disableFor[curClassId.toString()] = false;
+        }
+        else {
+            mod.settings.disableFor[curClassId.toString()] = true;
+        }
+        command.message('Changed setting for the current class to "Disabled" : ' + mod.settings.disableFor[curClassId.toString()].toString());
+    }
     function LoadSP () {
         try {
             const result = mod.manager.load(mod_name);
@@ -59,8 +67,7 @@ module.exports = function SkillPredictEnabler(mod) {
                 UnloadSP();
                 break;
             case "setting":
-                mod.settings.disableFor[curClassId.toString()] == !mod.settings.disableFor[curClassId.toString()];
-                command.message('Changed setting for the current class to "Disabled" : ' + mod.settings.disableFor[curClassId.toString()].toString());
+                SwitchSetting();
                 break;
             case "debug":
                 Debug();
@@ -73,6 +80,6 @@ module.exports = function SkillPredictEnabler(mod) {
 
     function Debug () {
         let modRef = mod.manager.get(mod_name);
-        confirm.log(modRef);
+        console.log(modRef);
     }
 }
